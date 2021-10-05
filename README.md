@@ -3,8 +3,6 @@ or links, please share them by [opening a pull request](https://github.com/HackY
 
 # HackYourFuture Elastic Bootcamp
 
-In this number_of_weeks week module we will build a MASTERCLASS application from scratch
-
 ## Prerequisites
 
 - Familiarity with Node.js, Express.js and a relational database like MySQL
