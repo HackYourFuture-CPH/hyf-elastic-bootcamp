@@ -4,7 +4,7 @@ In this week's workshop we will demonstrate how to ingest logs from the existing
 # Prerequisites
 In this Exercise you will use the deployment credentials you downloaded during the Intro Workshop. 
 
-In case you don't have the credentials, you should create a new Deployment and download the file in a safe place.
+If you don't have the deployment credentials from your Intro Workshop, you can reset the `elastic` user password [here](https://www.elastic.co/guide/en/cloud/current/ec-password-reset.html#ec-password-reset). 
 
  # Setup
 As mentioned above we will continue working on the existing movie app, but we will clone a new repository into a new folder. The new repository already contains the fixed solution from the apm workshop.
@@ -56,7 +56,7 @@ Please install the application and have it running before the workshop, by follo
     npm run dev
     ```
 
-5. Ensure that the backend application is reachable via http request by making a request to `http://localhost:3001/genres`
+5. Ensure that the backend application is reachable via http request by making a request to `http://localhost:3001/movies`
 
 If you get stuck no worries! We will start the demo by briefly recapping above steps together. If you have any questions before the workshop, feel free to post them in the Slack channel.
 
