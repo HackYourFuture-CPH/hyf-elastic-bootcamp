@@ -1,12 +1,18 @@
-# Week 1 : Topic #2
+# Week 2: Search experiences and UIs
 
-## Pre-requisites:
+## Pre-requisites
 
-Something about installing the software or prior knowlegde about a specific topic
+Clone the repo at https://github.com/orhantoy/task-search and follow the instructions in the [README](https://github.com/orhantoy/task-search#readme).
 
-## Lesson Plan:
-### 1.	Sub-topic #2.1
+## Lesson Plan
 
-### 2.	Sub-topic #2.2
-
-### 3.	Sub-topic #2.3
+- Fix the checkbox
+  - Clicking the checkbox does nothing to begin with. Let's fix that first.
+- Integrate with App Search
+  - Create an engine
+  - Sync newly created task to App Search engine
+  - Sync updated task to App Search engine
+  - Adjust engine schema
+- Search UI
+  - Generate and download Search UI app
+  - Integrate into existing Task Search app
