@@ -10,4 +10,5 @@
   - Integrate into existing Task Search app
 
 _Optional:_
-Support deleting tasks. Deleting should delete from DB first, and then App Search.
+- Support deleting tasks. Deleting should delete from DB first, and then App Search.
+- Make app work with PostgreSQL and deploy to Heroku.
