@@ -6,8 +6,6 @@ Clone the repo at https://github.com/orhantoy/task-search and follow the instruc
 
 ## Lesson Plan
 
-- Fix the checkbox
-  - Clicking the checkbox does nothing to begin with. Let's fix that first.
 - Integrate with App Search
   - Create an engine
   - Sync newly created task to App Search engine
