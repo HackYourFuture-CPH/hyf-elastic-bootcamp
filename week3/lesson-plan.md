@@ -25,34 +25,35 @@ Navigate to the movie-backend folder (if you are not already there) and install 
 
 ```
 cd movie-backend
-npm install winston express-winston @elastic/ecs-winston-format got
+npm install winston @elastic/ecs-winston-format got
 ```
 
-Under movie-backend create a `utils` folder with a `logger.js` file inside it and save it with the contents found [here](https://raw.githubusercontent.com/mgiota/apm-movie-demo-app/logs/movie-backend/src/logger.js).
+Under movie-backend create a `utils` folder with a `logger.js` file inside it and save it with the contents found [here](https://raw.githubusercontent.com/mgiota/apm-movie-demo-app/logs/movie-backend/src/utils/logger.js).
 
  
-Open `index.js` to make use of the logger we just created. Add following code after const port = 3001 (line 17):
+Open `index.js` and add following lines of code after line 17 where you defined the port number:
 
 ```
-const logger = require('./logger').logger;
-const errorLogger = require('./logger').errorLogger;
-app.use(logger);
+const logger = require('./utils/logger').logger;
+const expressRequestLogger = require('./utils/logger').expressRequestLogger;
+const expressErrorLogger = require('./utils/logger').expressErrorLogger;
+app.use(expressRequestLogger({ logger }))
 ```
 
  The error logger needs to be added AFTER the express routers and BEFORE any of your custom error handlers. You should add following code before the errorHandler function:
 ```
 app.use('/error', function(req, res, next) {
-  // here we cause an error in the pipeline
+  // here we cause an error in the pipeline.
   return next(new Error("This is an error"));
 });
 
-// express-winston errorLogger makes sense AFTER the router.
-app.use(errorLogger);
+// Express error logger makes sense after the router
+app.use(expressErrorLogger({ logger }));
 ```
 
 Let's test what we've done so far: 
 * Open your browser and navigate to `http://localhost:3001/movies`. You should see a `logs.json` file under a newly created logs folder. 
-* Open your `db.js` file and change the password to a wrong one. Refresh your browser and verify that a new error will appear in your logs.json file. Don't forget to undo the change to the db.js file.
+* Open your `db.js` file and change the password to a wrong one. Refresh your browser and verify that a new line with the message `error handling GET /error` will appear in your logs.json file. Don't forget to undo the change to the db.js file.
 
 
 ### 2. Create a Node.js HTTP request application
@@ -63,10 +64,10 @@ Under movie-backend/src folder, create `_webrequests.js` and save it with the co
 
 This Node.js app generates HTTP random requests to the different endpoints (movies, genres, directors and error) and a random from request header using various pretend email addresses. The requests are sent at random intervals between 1 and 10 seconds.
 
-In a new terminal run:
+In a new terminal make sure you are in the movie-backend folder and run:
 
 ```
-node _webrequests.js
+node src/_webrequests.js
 ``` 
 
 After the script has run for about 30 seconds, enter CTRL + C to stop it. Have a look at your Node.js logs/logs.json file. It should contain some entries written in a JSON format with ECS fields. This allows for easy parsing and analysis, and for standardization with other applications. 
@@ -163,14 +164,14 @@ Now it's time to create visualizations based on the logs data.
 4. In the CHART TYPE dropdown box, select Bar vertical stacked, if it isn’t already selected.
 5. Check that the time filter is set to Last 1 hour.
 6. From the Available fields list, drag and drop the `@timestamp` field onto the visualization builder.
-7. Drag and drop the `meta.req.url` field onto the visualization builder.
+7. Drag and drop the `http.req.headers.from` field onto the visualization builder.
 8. A stacked bar chart now shows the relative frequency of each of the different urls used in our example, measured over time.
 9. Click Save and return to add this visualization to your dashboard.
 
 Let's create one more visualization.
 1. Click Create visualization. The Lens visualization editor opens.
 2. In the CHART TYPE dropdown box, select Donut.
-3. From the list of available fields, drag and drop the `meta.req.headers.from` field onto the visualization builder. A donut chart appears.
+3. From the list of available fields, drag and drop the `http.req.headers.from` field onto the visualization builder. A donut chart appears.
 4. Click Save and return to add this visualization to your dashboard.
 5. Click Save and add a title to save your new dashboard.
 
@@ -189,4 +190,3 @@ To see the final solution including the logs instrumentation, checkout the `logs
 * [Integration with APM tracing](https://www.elastic.co/guide/en/ecs-logging/nodejs/current/winston.html?baymax=rec&rogue=rec-1&elektra=guide#winston-apm)
 * [Everything you Always Wanted to Know about Filebeat](https://www.youtube.com/watch?v=ykuw1piMGa4)
 * [Filebeat quickstart: installation and configuration](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-installation-configuration.html)
-

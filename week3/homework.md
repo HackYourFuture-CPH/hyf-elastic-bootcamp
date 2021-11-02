@@ -5,7 +5,7 @@ In this Exercise you will create a new vertical bar chart, which visualizes the 
 
 - Create a chart of type `Bar vertical`
 - Drag and drop the `@timestamp` field onto the visualization builder
-- Drag and drop the `meta.res.statusCode` field onto the `Break down by` area
+- Drag and drop the `http.response.status_code` field onto the `Break down by` area
 - Save the new Visualization into your Dashboard
 
 ## Exercise 2 - Enable MySQL Filebeat module [Optional]
