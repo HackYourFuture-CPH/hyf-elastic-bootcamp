@@ -28,7 +28,7 @@ cd movie-backend
 npm install winston @elastic/ecs-winston-format got
 ```
 
-Under movie-backend create a `utils` folder with a `logger.js` file inside it and save it with the contents found [here](https://raw.githubusercontent.com/mgiota/apm-movie-demo-app/logs/movie-backend/src/utils/logger.js).
+Under movie-backend/src folder create a `utils` folder with a `logger.js` file inside it and save it with the contents found [here](https://raw.githubusercontent.com/mgiota/apm-movie-demo-app/logs/movie-backend/src/utils/logger.js).
 
  
 Open `index.js` and add following lines of code after line 17 where you defined the port number:
@@ -164,14 +164,14 @@ Now it's time to create visualizations based on the logs data.
 4. In the CHART TYPE dropdown box, select Bar vertical stacked, if it isn’t already selected.
 5. Check that the time filter is set to Last 1 hour.
 6. From the Available fields list, drag and drop the `@timestamp` field onto the visualization builder.
-7. Drag and drop the `http.req.headers.from` field onto the visualization builder.
+7. Drag and drop the `http.request.headers.from` field onto the visualization builder.
 8. A stacked bar chart now shows the relative frequency of each of the different urls used in our example, measured over time.
 9. Click Save and return to add this visualization to your dashboard.
 
 Let's create one more visualization.
 1. Click Create visualization. The Lens visualization editor opens.
 2. In the CHART TYPE dropdown box, select Donut.
-3. From the list of available fields, drag and drop the `http.req.headers.from` field onto the visualization builder. A donut chart appears.
+3. From the list of available fields, drag and drop the `http.request.headers.from` field onto the visualization builder. A donut chart appears.
 4. Click Save and return to add this visualization to your dashboard.
 5. Click Save and add a title to save your new dashboard.
 
